@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements  ListFragment.OnL
             transaction.replace(R.id.container,listFragment);
             transaction.commit();
             detailsFragment = null;
-        }else{
-        super.onBackPressed();}
+        }
+        super.onBackPressed();
     }
 
     @Override

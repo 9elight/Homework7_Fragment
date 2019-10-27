@@ -3,7 +3,7 @@ package com.delight.lesson7_fragment_m3;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +17,16 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
         data = new ArrayList<>();
         this.listener = listener;
     }
+
+    public  void setData(ArrayList<String> data){
+        this.data = data;
+        notifyDataSetChanged();
+    }
+    public void deleteString (int position){
+        data.remove(position);
+        notifyDataSetChanged();
+    }
+
 
     public void addString(String s){
         data.add(s);
@@ -34,7 +44,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
-        holder.onBind(data.get(position));
+        holder.onBind(data.get(position),position);
     }
 
     @Override
@@ -42,3 +52,4 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
         return data.size();
     }
 }
+

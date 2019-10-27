@@ -1,6 +1,7 @@
 package com.delight.lesson7_fragment_m3;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 
 /**
@@ -38,6 +43,9 @@ public class ListFragment extends Fragment implements  iVhListener {
     private MainAdapter adapter;
 
     private Button button;
+
+
+
 
 
     View view;
@@ -76,6 +84,9 @@ public class ListFragment extends Fragment implements  iVhListener {
 
         }
 
+        ArrayList<String> strings = DataStore.getmSharedInstance().getSavedStrings(getContext());
+        adapter.setData(strings);
+
     }
 
     @Override
@@ -108,11 +119,21 @@ public class ListFragment extends Fragment implements  iVhListener {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    mListener.addElementButtonPressed();
+                        saveNewElem();
+//                        mListener.addElementButtonPressed();
                 }
             });
         return view;
+    }
+    public void saveNewElem(){
+
+        Random random = new Random();
+        int r = random.nextInt();
+       String s = "new elem" + r;
+       DataStore.getmSharedInstance().saveString(getContext(),s);
+
+
+        adapter.addString(s);
     }
 
 
@@ -139,6 +160,12 @@ public class ListFragment extends Fragment implements  iVhListener {
         if (mListener != null) {
             mListener.onOpenDetails(s);
         }
+    }
+
+    @Override
+    public void onDelete(int position) {
+        DataStore.getmSharedInstance().deleteString(getContext(),position);
+        adapter.deleteString(position);
     }
 
     public void addElement(String s){

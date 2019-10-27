@@ -6,9 +6,15 @@
 
     <TextView
         android:id="@+id/vh_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
         android:textSize="30sp"
         android:textAlignment="center"
         />
+    <Button
+        android:id="@+id/vh_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:text="Delete"
+        android:textSize="30sp"/>
 </LinearLayout>
